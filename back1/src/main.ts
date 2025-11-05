@@ -13,7 +13,7 @@ import { v2_module } from '@src/v2_module'
 import { App_auth_Module } from '@src/App_Auth'
 // import { client_mq } from '@src/client_mq'
 
-const list_module = [{ title: 'common', description: '通用接口', imports: [home_module] }, v1_module, v2_module]
+const list_module = [ v1_module, v2_module,{ title: 'common', description: '通用接口', imports: [home_module] },]
 // console.log(`111---list_module:`, list_module)
 @Module({
   imports: [App_auth_Module, ...list_module.flatMap((o) => o.imports)],
