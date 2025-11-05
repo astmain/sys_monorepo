@@ -1,7 +1,6 @@
 {
-  "name": "tool_my",
+  "name": "tool_db",
   "version": "1.0.0",
-  "type": "commonjs",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,13 +12,15 @@
   },
   "scripts": {
     "build": "tsc",
+    "start": "ts-node src/index.ts",
     "dev": "ts-node src/index.ts",
-    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "@types/node": "^20.19.24",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+  "dependencies": {
+    "@anatine/zod-nestjs": "^2.0.12",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.1.14",
+    "typeorm": "^0.3.27",
+    "zod": "^4.1.12"
   }
 }

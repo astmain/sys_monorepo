@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger'
 import { Api_Get } from '@src/plugins/Api_Get'
 import { Api_group } from '@src/plugins/Api_group'
 import * as tool_my from 'tool_my'
-
+import * as tool_db from 'tool_db'
 // dto
 import { ApiProperty, PickType } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, Min, ValidateNested } from 'class-validator'
@@ -28,6 +28,14 @@ export class user {
     console.log(`add---`, tool_my.add)
     let add_result = tool_my.add(1, 2)
     console.log(`add_result---`, add_result)
+
+    let one = new tool_db.tb_test1({ name: '1111', aaa: 111 })
+    // one.name = 'test666'
+    await tool_db.db_typeorm.save(one)
+
+    let res = await tool_db.db_typeorm.find(tool_db.tb_test1)
+    console.log(`res---`, res)
+
     return { code: 200, msg: '成功:v1', result: { list, tool_my: add_result } }
   }
 }

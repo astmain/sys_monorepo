@@ -4,6 +4,7 @@
  * 示例函数
  */
 export function hello_world(): string {
+  console.log('hello_world111');
   return 'Hello, TypeScript!'
 }
 

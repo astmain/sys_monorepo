@@ -41,6 +41,7 @@
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.0",
     "tool_my": "workspace:*",
+    "tool_db": "workspace:*",
     "zod": "^4.1.11"
   },
   "devDependencies": {
