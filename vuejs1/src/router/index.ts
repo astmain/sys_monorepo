@@ -5,30 +5,17 @@ export const view_admin = [
   { name: "个人中心", path: "/user_center", component: () => import("../layout/user_center.vue") },
 
   // 首页
-  { name: "首页", path: "/home", component: () => import("../view_admin/home/home.vue") },
-  // 系统管理
-  { name: "字典管理", path: "/dict", component: () => import("../view_admin/dict/dict.vue") },
-  { name: "用户管理", path: "/system/user", component: () => import("../view_admin/system/user/user.vue") },
-  { name: "部门管理", path: "/system/depart", component: () => import("../view_admin/system/depart/depart.vue") },
-  { name: "菜单管理", path: "/system/menu", component: () => import("../view_admin/system/menu/menu.vue") },
-  // 商城管理
-  { name: "订单管理", path: "/shop/order", component: () => import("../view_admin/shop/order/order.vue") },
-  { name: "商品管理", path: "/shop/product", component: () => import("../view_admin/shop/product/product.vue") },
-  { name: "财务管理", path: "/shop/finance", component: () => import("../view_admin/shop/finance/finance.vue") },
-  // 测试页面
-  { name: "测试MQTT", path: "/test_mqtt", component: () => import("../view_admin/test_mqtt/test_mqtt.vue") },
+  { name: "首页", path: "/home", component: () => import("../views/home/home.vue") },
+
 ]
 
 // ==================== 商城界面 ====================
 export const view_shop = [
-  { name: "3D打印", path: "/print_3d", component: () => import("@/view_shop/print_3d/print_3d.vue") },
-  { name: "3D模型", path: "/model_shop", component: () => import("@/view_shop/model_3d/model_shop.vue") },
-  { name: "模型上传", path: "/model_save", component: () => import("@/view_shop/model_3d/model_save.vue") },
-  { name: "模型管理", path: "/model_manage", component: () => import("@/view_shop/model_3d/model_manage.vue") },
-  { name: "模型商品", path: "/model_product", component: () => import("@/view_shop/model_3d/model_product.vue") },
-  { name: "购物车", path: "/cart", component: () => import("@/view_shop/cart/cart.vue") },
-  { name: "我的订单", path: "/my_order", component: () => import("@/view_shop/my_order/my_order.vue") },
+ 
   { name: "markdown", path: "/markdown", component: () => import("@/layout/markdown/markdown.vue") },
+  { name: "模型商城", path: "/model_shop", component: () => import("../views/model_shop/model_shop.vue") },
+  { name: "打印商城", path: "/print_shop", component: () => import("../views/print_shop/print_shop.vue") },
+
   // { name: "购物车", path: "/cart", component: () => import("@/view_shop/cart/cart.tsx") },
 ]
 
