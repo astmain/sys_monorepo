@@ -29,9 +29,10 @@ export class user {
     let add_result = tool_my.add(1, 2)
     console.log(`add_result---`, add_result)
 
-    let one = new tool_db.tb_test1({ name: '1111', aaa: 111 })
+    let one = new tool_db.tb_test1({ id:"111111111111111111111111",name: '1111' })
     // one.name = 'test666'
     await tool_db.db_typeorm.save(one)
+    await tool_db.db_typeorm.save(new tool_db.tb_test1({ name: '1111' }))
 
     let res = await tool_db.db_typeorm.find(tool_db.tb_test1)
     console.log(`res---`, res)

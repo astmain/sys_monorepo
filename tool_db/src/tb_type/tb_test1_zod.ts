@@ -2,7 +2,7 @@
 import { z } from 'zod'
 
 export const tb_test1_zod = z.object({
-  id: z.number().int().positive(),
+  id: z.string().optional(),
   name: z.string().min(1),
 })
 

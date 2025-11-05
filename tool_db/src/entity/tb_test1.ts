@@ -1,25 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column } from 'typeorm'
 import { tb_test1_zod_i } from '../tb_type/tb_test1_zod'
 
-// 严格类型，只允许传入已定义的字段，不允许额外属性
-type Exact<T> = {
-  [K in keyof T]: T[K]
-} & {
-  [K in Exclude<string, keyof T>]?: never
-}
-
 // 定义构造函数参数类型，只允许 name 和 id 字段
-type TbTest1ConstructorData = Exact<{
-  id?: number
+type TbTest1ConstructorData = {
+  id?: string
   name?: string
-}>
+}
 
 @Entity('tb_test1')
 export class tb_test1 implements tb_test1_zod_i {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryColumn({ type: 'varchar', comment: '主键ID，可以是自定义字符串' })
+  id?: string
 
-  @Column()
+  @Column({ comment: '名称' })
   name: string
 
   constructor(data?: TbTest1ConstructorData) {
@@ -27,10 +20,16 @@ export class tb_test1 implements tb_test1_zod_i {
       // 只赋值实体中存在的字段
       if ('id' in data && data.id !== undefined) {
         this.id = data.id
+      } else {
+        // 如果没有提供 ID，自动生成一个字符串 ID
+        this.id = Date.now().toString() + '_' + Math.random().toString(36).substring(2, 11)
       }
       if ('name' in data && data.name !== undefined) {
         this.name = data.name
       }
+    } else {
+      // 如果没有传入任何数据，也生成一个默认 ID
+      this.id = Date.now().toString() + '_' + Math.random().toString(36).substring(2, 11)
     }
   }
 }
