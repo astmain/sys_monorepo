@@ -19,12 +19,12 @@ class find_list_user {
 
 // http://127.0.0.1:3002/doc.html
 // http://127.0.0.1:3002/v2/user/find_list_user?name1=111
-@Api_group('v2', '用户管理')
+@Api_group('v1', '用户管理')
 export class user {
   @Api_Get('查询用户列表')
   async find_list_user(@Query() body: find_list_user, @Req() _req: any) {
     let list = await db.test1.findMany()
-    return { code: 200, msg: '成功:v2', result: { list } }
+    return { code: 200, msg: '成功:v1', result: { list } }
   }
 }
 

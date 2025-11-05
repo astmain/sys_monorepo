@@ -11,7 +11,7 @@ import { Api_doc_group_swagger_knife4j2 } from '@src/plugins/Api_doc_group_swagg
 import { v1_module } from '@src/v1_module'
 import { v2_module } from '@src/v2_module'
 import { App_auth_Module } from '@src/App_Auth'
-import { client_mq } from '@src/client_mq'
+// import { client_mq } from '@src/client_mq'
 
 const list_module = [{ title: 'common', description: '通用接口', imports: [home_module] }, v1_module, v2_module]
 // console.log(`111---list_module:`, list_module)
@@ -42,7 +42,7 @@ async function main() {
   console.log(`path_project1---`, path_project1)
   process['path_project'] = path_project1
 
-   client_mq()
+  //  client_mq()
 
 
 

@@ -1,6 +1,6 @@
 import { Module, Global, DynamicModule } from '@nestjs/common'
 // import { PrismaClient, Prisma } from '@prisma/client'
-import { PrismaClient, Prisma } from '@prisma_v2_client'
+import { PrismaClient, Prisma } from '@prisma_v1_client'
 import _ from 'lodash'
 
 // 虚拟字段扩展

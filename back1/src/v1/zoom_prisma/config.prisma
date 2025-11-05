@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../../../node_modules/@prisma_v2_client"
+  output   = "../../../node_modules/@prisma_v1_client"
 }
 
 // datasource db {
@@ -10,5 +10,5 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://root:123456@103.119.2.223:2003/back?schema=public"
+  url      = "postgresql://root:123456@103.119.2.223:2004/back?schema=public"
 }
