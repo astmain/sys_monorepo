@@ -14,11 +14,12 @@ export const use_BUS = defineStore("localStorage_BUS", {
 
     VITE_url_app_list: [] as any[],
     token: "",
-    url_api_curr: { name: "3002", url: "http://127.0.0.1:3002", remark: "" },
+    url_api_curr:{ name: "3004", url: "http://127.0.0.1:3004", remark: "" },
     url_api_list: [
       { name: "3000", url: "http://127.0.0.1:3000", remark: "" },
       { name: "3001", url: "http://127.0.0.1:3001", remark: "" },
       { name: "3002", url: "http://127.0.0.1:3002", remark: "" },
+      { name: "3004", url: "http://127.0.0.1:3004", remark: "" },
       { name: "8001", url: "http://127.0.0.1:8001/api", remark: "" },
       { name: "server.oss", url: "https://server.oss.yun3d.com", remark: "" },
     ],

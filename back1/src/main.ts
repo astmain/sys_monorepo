@@ -10,17 +10,18 @@ import { home_module } from '@src/home_module'
 import { Api_doc_group_swagger_knife4j2 } from '@src/plugins/Api_doc_group_swagger_knife4j2'
 import { v1_module } from '@src/v1_module'
 import { v2_module } from '@src/v2_module'
+import { test_module } from '@src/test_module'
 import { App_auth_Module } from '@src/App_Auth'
 import * as tool_db from 'tool_db'
 // import { client_mq } from '@src/client_mq'
 
-const list_module = [ v1_module, v2_module,{ title: 'common', description: '通用接口', imports: [home_module] },]
+const list_module = [v1_module, v2_module, test_module, { title: 'common', description: '通用接口', imports: [home_module] },]
 // console.log(`111---list_module:`, list_module)
 @Module({
   imports: [App_auth_Module, ...list_module.flatMap((o) => o.imports)],
   controllers: [],
 })
-class App_Module {}
+class App_Module { }
 
 async function main() {
   const app = await NestFactory.create(App_Module)

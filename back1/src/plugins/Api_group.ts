@@ -8,14 +8,14 @@ import 'reflect-metadata'
 
 
 
-const list_version = ['common', 'v1', 'v2']
+const list_version = ['common', 'v1', 'v2', 'test']
 
 
 
 // 装饰器：结合 Controller + ApiTags
 // export function Api_group(branch: '' | 'v1' | 'v2', tagName: string) {
-export function Api_group(version: 'common' | 'v1' | 'v2', name: string) {
-  return function <T extends { new (...args: any[]): {} }>(target: T) {
+export function Api_group(version: 'common' | 'v1' | 'v2' | 'test', name: string) {
+  return function <T extends { new(...args: any[]): {} }>(target: T) {
     // 生成控制器路径：branch/className (如: v1/user 或 user)
 
     const controller_path = version === 'common' ? target.name : `${version}/${target.name}`

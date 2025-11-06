@@ -1,4 +1,4 @@
-export const dict_obj ={
+export const dict_obj = {
   "type_format": {
     "children": [
       {
