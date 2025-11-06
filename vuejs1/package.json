@@ -47,6 +47,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/three": "^0.169.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.16.5",
