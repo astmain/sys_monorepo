@@ -83,9 +83,12 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     controls_arcball.dampingFactor = 0.01
     controls_arcball.setGizmosVisible(false)
 
-    // 🟩坐标辅助
-    const axes_helper = new THREE.AxesHelper(100)
-    scene.add(axes_helper)
+
+    // // 🟩坐标辅助
+    // const axes_helper = new THREE.AxesHelper(100)
+    // scene.add(axes_helper)
+
+    // 我希望如何左下角 显示一个坐标盒子
 
 
     // 🟩渲染循环
