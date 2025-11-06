@@ -1,7 +1,7 @@
 <template>
   <input ref="ref_file_input" class="file_input" type="file" @change="get_input_file" accept=".stl,.obj" />
   <!-- 画布three解析 -->
-  <canvas id="canvas_three_parse" style="width: 100%; height: 300px; border: 1px solid red; box-sizing: border-box" />
+  <canvas id="canvas_three_parse" style="width: 1000px; height: 500px; border: 1px solid red; box-sizing: border-box" />
 </template>
 
 <script setup lang="tsx">
