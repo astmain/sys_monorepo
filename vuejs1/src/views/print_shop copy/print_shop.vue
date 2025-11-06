@@ -10,10 +10,16 @@ import { ElMessage } from "element-plus"
 
 import { canvas_three_parse } from "./canvas_three_parse"
 async function get_input_file(event: any) {
-  const file = event.target.files[0]
-
-  // 绘制three解析
-  const result = await canvas_three_parse({ canvas: document.getElementById("canvas_three_parse"), file })
-  console.log(`get_input_file---result:`, result)
+  try {
+    const file = event.target.files[0]
+    // 绘制three解析
+    const result = await canvas_three_parse({ canvas: document.getElementById("canvas_three_parse"), file })
+    console.log(`get_input_file---result:`, result)
+  } catch (error) {
+    console.error(`get_input_file---error:`, error)
+    throw error
+  } finally {
+    event.target.value = ""
+  }
 }
 </script>

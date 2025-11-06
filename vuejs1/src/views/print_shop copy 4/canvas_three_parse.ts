@@ -1,7 +1,5 @@
 import * as THREE from "three"
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import { ArcballControls } from "three/examples/jsm/Addons.js"
 
 export async function canvas_three_parse({ canvas, file }: { canvas: any, file: any }) {
   const blobURL = URL.createObjectURL(file)
@@ -68,31 +66,9 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     camera.position.set(size_max * 2, size_max * 2, size_max * 2)
     camera.lookAt(0, 0, 0)
 
-
-
-    // 🟩控制器controls_orbit
-    // let controls_orbit = new OrbitControls(camera, renderer.domElement)
-    // controls_orbit.enableDamping = true////动画阻尼
-    // controls_orbit.dampingFactor = 0.2
-
-
-
-    // 🟩控制器controls_arcball(托球式)
-    let controls_arcball = new ArcballControls(camera, renderer.domElement, scene)
-    controls_arcball.enableAnimations = false//动画阻尼
-    controls_arcball.dampingFactor = 0.01
-    controls_arcball.setGizmosVisible(false)
-
-    // 🟩坐标辅助
-    const axes_helper = new THREE.AxesHelper(100)
-    scene.add(axes_helper)
-
-
-    // 🟩渲染循环
+    // 渲染循环
     function animate() {
       requestAnimationFrame(animate)
-      // controls_orbit.update()
-      controls_arcball?.update()
       renderer.render(scene, camera)
     }
     animate()

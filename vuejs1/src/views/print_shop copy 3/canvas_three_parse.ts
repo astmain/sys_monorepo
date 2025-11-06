@@ -1,7 +1,5 @@
 import * as THREE from "three"
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import { ArcballControls } from "three/examples/jsm/Addons.js"
 
 export async function canvas_three_parse({ canvas, file }: { canvas: any, file: any }) {
   const blobURL = URL.createObjectURL(file)
@@ -35,8 +33,6 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     scene.add(mesh)//场景-添加-网格
 
     // 🟩灯光
-    const light_hemisphere = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5) // (半球光)天空色为白色，地面色为灰色，强度为0.6
-    light_hemisphere.position.set(0, 1, 0)//     半球光-光源位置
     const light_ambient = new THREE.AmbientLight(0xffffff, 0.5)//    (环境光)白色光，强度为0.5
     const light_direct = new THREE.DirectionalLight(0xffffff, 0.8)// (方向光)白色光，强度为0.8
     light_direct.position.set(105, 105, 105)//   方向光-光源位置
@@ -46,9 +42,8 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     light_direct.shadow.mapSize.height = 2048
     light_direct.shadow.camera.near = 0.5
     light_direct.shadow.camera.far = 50
-    scene.add(light_ambient)//    场景-添加-环境光
-    scene.add(light_direct)//     场景-添加-方向光
-    scene.add(light_hemisphere)// 场景-添加-半球光
+    scene.add(light_ambient)//场景-添加-环境光
+    scene.add(light_direct)// 场景-添加-方向光
 
     // 🟩盒子,居中并获取尺寸
     my_geometry.computeBoundingBox()
@@ -68,33 +63,28 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     camera.position.set(size_max * 2, size_max * 2, size_max * 2)
     camera.lookAt(0, 0, 0)
 
-
-
-    // 🟩控制器controls_orbit
-    // let controls_orbit = new OrbitControls(camera, renderer.domElement)
-    // controls_orbit.enableDamping = true////动画阻尼
-    // controls_orbit.dampingFactor = 0.2
-
-
-
-    // 🟩控制器controls_arcball(托球式)
-    let controls_arcball = new ArcballControls(camera, renderer.domElement, scene)
-    controls_arcball.enableAnimations = false//动画阻尼
-    controls_arcball.dampingFactor = 0.01
-    controls_arcball.setGizmosVisible(false)
-
-    // 🟩坐标辅助
-    const axes_helper = new THREE.AxesHelper(100)
-    scene.add(axes_helper)
-
-
-    // 🟩渲染循环
+    // 渲染循环
     function animate() {
       requestAnimationFrame(animate)
-      // controls_orbit.update()
-      controls_arcball?.update()
       renderer.render(scene, camera)
     }
     animate()
+
+    // // 处理窗口/容器尺寸变化
+    // const on_resize = () => {
+    //   const nw = canvas.clientWidth || w
+    //   const nh = canvas.clientHeight || h
+    //   renderer.setSize(nw, nh, false)
+    //   const aspect2 = nw / nh
+    //   const half_h2 = size_max * 0.8
+    //   const half_w2 = half_h2 * aspect2
+    //   camera.left = -half_w2
+    //   camera.right = half_w2
+    //   camera.top = half_h2
+    //   camera.bottom = -half_h2
+    //   camera.updateProjectionMatrix()//改相机投影参数后，重新计算投影矩阵
+    //   console.log(`111---222:`, 1111)
+    // }
+    // window.addEventListener("resize", on_resize)
   })
 }
