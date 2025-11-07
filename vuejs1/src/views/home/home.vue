@@ -21,7 +21,9 @@ let cube: any = ref()
 let camera: any = $ref()
 let scene: any = $ref()
 let renderer: any = $ref()
-let blobURL = ref("blob:http://127.0.0.1:8080/a12b3d6d-a8ba-4ea3-b240-ad746ba69294")
+// let blobURL = ref("blob:http://127.0.0.1:8080/cf3e2121-3b4a-4e1e-b290-70f26fcf82e1")
+// let blobURL = ref("./6mb招财猫.stl")
+let blobURL = ref("./3mb钩子.stl")
 
 function light_make(scene: THREE.Scene) {
   light_ambient_1(scene) //环境光
@@ -63,6 +65,7 @@ async function three_view({ canvas, blobURL }: { canvas: any; blobURL?: string }
   animate()
   function animate(cube_rotation_y = 0.01) {
     requestAnimationFrame(animate)
+
     controls?.update()
     renderer.render(scene, camera)
   }
@@ -87,11 +90,21 @@ function make_camera1() {
 
 // 🟩控制器controls_arcball(托球式)
 function make_controls_1_arcball({ camera, renderer, scene }: { camera: THREE.PerspectiveCamera; renderer: THREE.WebGLRenderer; scene: THREE.Scene }) {
-  let controls_arcball = new ArcballControls(camera, renderer.domElement, scene)
-  controls_arcball.enableAnimations = false //动画阻尼
-  controls_arcball.dampingFactor = 0.01
-  controls_arcball.setGizmosVisible(false)
-  return controls_arcball
+  let controls = new ArcballControls(camera, renderer.domElement, scene)
+  controls.enableAnimations = false //动画阻尼
+  controls.dampingFactor = 0.01 //阻尼系数0-1  越大越不灵敏
+  controls.enableZoom = true //启用缩放,滚轮缩放
+  controls.setGizmosVisible(false) // 隐藏坐标轴控件
+
+  // controls.setMouseAction("ROTATE", THREE.MOUSE.RIGHT) //启用右键旋转
+  // controls.setMouseAction("PAN", THREE.MOUSE.MIDDLE) //启用中键平移
+  // controls.unsetMouseAction(THREE.MOUSE.LEFT) //禁用左键旋转
+  // controls.enablePan = true //启用平移,鼠标中键平移
+  // controls.rotateSpeed = 2.0 //旋转速度
+  // controls.minDistance = 0.1 //最小距离
+  // controls.maxDistance = 1000 //最大距离
+
+  return controls
 }
 
 // 🟩场景1
@@ -192,6 +205,6 @@ async function get_input_file(event: any) {
 }
 
 onMounted(() => {
-  // three_view({ canvas: ref_canvas, blobURL: blobURL.value })
+  three_view({ canvas: ref_canvas, blobURL: blobURL.value })
 })
 </script>
