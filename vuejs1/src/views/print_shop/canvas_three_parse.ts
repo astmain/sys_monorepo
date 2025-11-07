@@ -60,6 +60,9 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     mesh.position.sub(center) // 网格-位置-减去-中心点
     const size_max = Math.max(size.x, size.y, size.z) || 1
 
+    // 🟩盒子边框
+    box_border(my_geometry, scene)
+
     // 🟩相机-根据画布比例自适配-目前正交角度
     const aspect = w / h
     const half_h = size_max * 0.8
@@ -100,4 +103,33 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     }
     animate()
   })
+}
+
+
+// 🟩包装盒（透明橙色边界框）- 确保完全包裹模型
+// 边界框的尺寸基于原始几何体的边界框，添加1%边距确保完全包裹
+function box_border(my_geometry: any, scene: any) {
+  const size = my_geometry.boundingBox!.getSize(new THREE.Vector3())
+  const padding = 1.01 // 1%边距
+  const box_geometry = new THREE.BoxGeometry(size.x * padding, size.y * padding, size.z * padding)
+  // 透明面材质
+  const box_material = new THREE.MeshBasicMaterial({
+    color: 0xff8800, // 橙色
+    transparent: true,
+    opacity: 0, // 透明度
+    side: THREE.DoubleSide
+  })
+  const box_mesh = new THREE.Mesh(box_geometry, box_material)
+  // 包装盒中心应该在原点（与模型中心一致）
+  box_mesh.position.set(0, 0, 0)
+  scene.add(box_mesh)
+  // 边框线条
+  const edges_geometry = new THREE.EdgesGeometry(box_geometry)
+  const edges_material = new THREE.LineBasicMaterial({
+    color: 0xff8800, // 橙色
+    linewidth: 1
+  })
+  const edges_line = new THREE.LineSegments(edges_geometry, edges_material)
+  edges_line.position.set(0, 0, 0) // 边框也在原点
+  scene.add(edges_line)
 }
