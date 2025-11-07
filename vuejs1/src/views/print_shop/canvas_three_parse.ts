@@ -14,7 +14,7 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
 
 
     // 渲染器
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true }) //antialias: true 表示启用抗锯齿，让边缘更平滑，减少锯齿感。
     const device_pixel_ratio = Math.min(window.devicePixelRatio || 1, 1)//设备刷新率
     const w = canvas.clientWidth//渲染器宽度
     const h = canvas.clientHeight //渲染器高度

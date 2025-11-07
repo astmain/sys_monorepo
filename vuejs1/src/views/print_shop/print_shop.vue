@@ -13,6 +13,8 @@ import { canvas_three_parse } from "./canvas_three_parse"
 async function get_input_file(event: any) {
   const file = event.target.files[0]
 
+  const blobURL = URL.createObjectURL(file)
+
   // 绘制three解析
   const result = await canvas_three_parse({ canvas: document.getElementById("canvas_three_parse"), file })
   console.log(`get_input_file---result:`, result)
