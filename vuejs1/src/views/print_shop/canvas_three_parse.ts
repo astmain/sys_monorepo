@@ -3,32 +3,14 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { ArcballControls } from "three/examples/jsm/Addons.js"
 
-
-
-
-
-async function make_process(process_num: number) {
-  console.log(console.log(`make_process---blobURL_process---进度:`, process_num))
-}
-
-
 export async function canvas_three_parse({ canvas, file }: { canvas: any, file: any }) {
-
-  make_process(1)
   const blobURL = URL.createObjectURL(file)
-  make_process(10)
-
-
   const loader_stl = new STLLoader()
-  make_process(11)
+
   loader_stl.load(blobURL, (geometry) => {
     let my_geometry = geometry//几何
     console.log(`canvas_three_parse---blobURL:`, blobURL)
-    make_process(12)
     URL.revokeObjectURL(blobURL)//用来释放通过 URL.createObjectURL临时创建的所占用的内存,防止内存泄漏
-    make_process(13)
-
-
 
 
     // 渲染器
@@ -39,7 +21,6 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     renderer.setPixelRatio(device_pixel_ratio)//以提升画质同时控制性能开销
     renderer.setSize(w, h, false)
     renderer.setClearColor(0x8f8aff)
-    renderer.autoClear = false // 关闭自动清屏，改为手动控制清屏顺序
 
     // 🟩场景
     const scene = new THREE.Scene()
@@ -102,67 +83,21 @@ export async function canvas_three_parse({ canvas, file }: { canvas: any, file: 
     controls_arcball.dampingFactor = 0.01
     controls_arcball.setGizmosVisible(false)
 
-    make_process(14)
+
     // // 🟩坐标辅助
     // const axes_helper = new THREE.AxesHelper(100)
     // scene.add(axes_helper)
 
     // 我希望如何左下角 显示一个坐标盒子
-    // 🟩左下角-坐标盒子小视口（裁剪+第二场景）
-    const axes_scene = new THREE.Scene()
-    const box_geo = new THREE.BoxGeometry(2, 2, 2)
-    const box_mats = [
-      new THREE.MeshBasicMaterial({ color: 0xff5555 }),
-      new THREE.MeshBasicMaterial({ color: 0x993333 }),
-      new THREE.MeshBasicMaterial({ color: 0x55ff55 }),
-      new THREE.MeshBasicMaterial({ color: 0x339933 }),
-      new THREE.MeshBasicMaterial({ color: 0x5555ff }),
-      new THREE.MeshBasicMaterial({ color: 0x333399 })
-    ]
-    // 小视口内的材质禁用深度测试/写入，避免被主场景深度影响
-    box_mats.forEach((mat) => {
-      mat.depthTest = false
-      mat.depthWrite = false
-    })
-    const axes_box = new THREE.Mesh(box_geo, box_mats)
-    axes_box.renderOrder = 999
-    axes_scene.add(axes_box)
-    const axes_helper_small = new THREE.AxesHelper(2.2)
-      ; (axes_helper_small.material as THREE.Material).depthTest = false
-      ; (axes_helper_small.material as THREE.Material).depthWrite = false
-    axes_helper_small.renderOrder = 999
-    axes_scene.add(axes_helper_small)
-    const axes_camera = new THREE.PerspectiveCamera(50, 1, 0.01, 10)
-    axes_camera.position.set(0, 0, 3)
-    axes_camera.lookAt(0, 0, 0)
-    const mini_scale = 0.22 // 小视口相对画布的比例
-    const mini_size = Math.round(Math.min(w, h) * mini_scale)
-    const mini_margin = 10
-    make_process(15)
+
+
     // 🟩渲染循环
     function animate() {
       requestAnimationFrame(animate)
       // controls_orbit.update()
       controls_arcball?.update()
-      // 主场景渲染
-      renderer.setScissorTest(true)
-      renderer.setViewport(0, 0, w, h)
-      renderer.setScissor(0, 0, w, h)
-      renderer.clear(true, true, true) // 主场景：清颜色/深度/模板
       renderer.render(scene, camera)
-      // 小视口渲染（左下角）
-      axes_camera.quaternion.copy(camera.quaternion)
-      const mini_x = mini_margin + 20
-      const mini_y = mini_margin + 20
-      renderer.setViewport(mini_x, mini_y, mini_size, mini_size)
-      renderer.setScissor(mini_x, mini_y, mini_size, mini_size)
-      renderer.clearDepth() // 小视口：仅清理深度，颜色保持背景色一致
-      // renderer.clearStencil() // 如使用了模板缓冲，可解注释
-      renderer.render(axes_scene, axes_camera) // 不更改清屏颜色，避免出现白色底框
-      renderer.setScissorTest(false)
     }
     animate()
-
-    make_process(100)
   })
 }
