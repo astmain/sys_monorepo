@@ -46,13 +46,19 @@ async function three_view({ canvas, blobURL }: { canvas: any; blobURL?: string }
   light_make(scene) /*场景-添加-光源*/
 
   const loader_stl = new STLLoader() //stl加载器
-  loader_stl.load(blobURL, (geometry) => {
-    const mesh = new THREE.Mesh(geometry, make_material3())
-    //自动计算并设置scale
-    auto_scale_mesh_simple(mesh, camera, renderer)
-    // 添加到场景
-    scene.add(mesh)
-  })
+  loader_stl.load(
+    blobURL,
+    (geometry) => {
+      const mesh = new THREE.Mesh(geometry, make_material3())
+      //自动计算并设置scale
+      auto_scale_mesh_simple(mesh, camera, renderer)
+      // 添加到场景
+      scene.add(mesh)
+    },
+    (xhr) => {
+      console.log(`STLLoader---xhr:`, xhr)
+    }
+  )
 
   /*渲染器-添加-场景-相机*/
   renderer.render(scene, camera)
