@@ -1,10 +1,5 @@
 <template>
   <input ref="ref_file_input" class="file_input" type="file" @change="get_input_file" accept=".stl,.obj,.gltf" />
-
-  <!-- <canvas id="canvas_three_parse" ref="ref_canvas" style="width: 1000px; height: 500px; border: 1px solid red; box-sizing: border-box" /> -->
-
-  <el-button @click="() => (cube.visible = !cube.visible)">显示/隐藏</el-button>
-
   <div id="id_canvas"></div>
 </template>
 <script setup lang="tsx">
