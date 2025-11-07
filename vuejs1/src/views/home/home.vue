@@ -68,9 +68,6 @@ async function three_view({ canvas, blobURL }: { canvas: any; blobURL?: string }
   animate()
   function animate(cube_rotation_y = 0.01) {
     requestAnimationFrame(animate)
-    // cube.rotation.x += 0.01
-    // cube.rotation.y += cube_rotation_y //旋转
-    // cube.rotation.y += 0.01 //旋转
     controls?.update()
     renderer.render(scene, camera)
   }
