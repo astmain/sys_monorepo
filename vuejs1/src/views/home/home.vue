@@ -50,17 +50,24 @@ async function three_view({ canvas, blobURL }: { canvas: any; blobURL?: string }
   loader_stl.load(
     blobURL,
     (geometry) => {
-      // const mesh = new THREE.Mesh(geometry, make_material3())
-      // auto_scale_mesh_simple(mesh, camera, renderer) //自动计算并设置scale
-      // scene.add(mesh) // 添加到场景
-      // ===========================================================
-      // const sphere = new THREE.SphereGeometry()
-      // const object = new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: 0xffff00 }))
-      // const box = new THREE.BoxHelper(object, 0xffff00)
-      // scene.add(box)
-      // const object = new THREE.Mesh(geometry, make_material3())
-      // const box = new THREE.BoxHelper(object, 0xffff00)
-      // scene.add(box)
+      // 几何_转_网状物
+      const mesh = new THREE.Mesh(geometry, make_material4())
+      // 盒子_包裹_网状物_可以得到数据(中心点,长宽高)
+      const box = new THREE.Box3().setFromObject(mesh)
+      const box_center = box.getCenter(new THREE.Vector3())
+      const { x: box_x, y: box_y, z: box_z } = box.getSize(new THREE.Vector3())
+      const box_x_y_z_max = Math.max(box_x, box_y, box_z)
+      // (相机可见高度) 依据相机距离与 FOV 估算可见高度
+      // const fov_rad = (camera.fov * Math.PI) / 180   //相机的视角角度弧度  乘以  是圆周率   角度转弧度公式：弧度 = 角度 × π / 180。
+      const fov_rad = THREE.MathUtils.degToRad(camera.fov) //相机的视角角度弧度  乘以  是圆周率   角度转弧度公式：弧度 = 角度 × π / 180。
+      const camera_visible_height = 2 * Math.tan(fov_rad / 2) * camera.position.length()
+      // 盒子_在相机中的缩放比例
+      const box_in_camera_scale = (camera_visible_height * 0.75) / box_x_y_z_max // 让模型高度约占 75% 视野
+      // 网状物_设置_缩放比例
+      mesh.scale.set(box_in_camera_scale, box_in_camera_scale, box_in_camera_scale)
+      // 网状物_设置_位置(中心点_反向_缩放比例)
+      mesh.position.set(-box_center.x * box_in_camera_scale, -box_center.y * box_in_camera_scale, -box_center.z * box_in_camera_scale)
+      scene.add(mesh)
     },
     (xhr) => {
       // let num_raw = (xhr.loaded / xhr.total) * 100
@@ -70,7 +77,7 @@ async function three_view({ canvas, blobURL }: { canvas: any; blobURL?: string }
     }
   )
 
-  const axes_helper = new THREE.AxesHelper(50) //红色x轴,绿色y轴,蓝色z轴
+  const axes_helper = new THREE.AxesHelper(999999) //红色x轴,绿色y轴,蓝色z轴
   scene.add(axes_helper)
 
   animate()
@@ -156,24 +163,6 @@ function light_point_1(scene: THREE.Scene) {
   return light
 }
 
-// 🟩简化版本（如果只需要简单适配）
-function auto_scale_mesh_simple(mesh: THREE.Mesh, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer) {
-  const box = new THREE.Box3().setFromObject(mesh)
-  const size = box.getSize(new THREE.Vector3())
-  const max_dimension = Math.max(size.x, size.y, size.z)
-  if (max_dimension === 0) return
-  // 根据相机距离和FOV计算视野大小
-  const camera_distance = camera.position.length()
-  const fov_rad = (camera.fov * Math.PI) / 180
-  const visible_height = 2 * Math.tan(fov_rad / 2) * camera_distance
-  // 使模型占据视野的70-80%
-  const scale = (visible_height * 0.75) / max_dimension
-  mesh.scale.set(scale, scale, scale)
-  // 居中模型
-  const center = box.getCenter(new THREE.Vector3())
-  mesh.position.sub(center.multiplyScalar(scale))
-}
-
 // 🟩材质1
 function make_material1() {
   //color基底颜色(灰色) //metalness0.2：金属度，范围 0~1。0 接近非金属（塑料/陶瓷），1 接近金属。0.2 表示略带金属感 //roughness粗糙度，范围 0~1。0 非常光滑镜面反射，1 非常粗糙漫反射。0.7 比较哑光。
@@ -192,6 +181,13 @@ function make_material2() {
 // 🟩材质3
 function make_material3() {
   const material_option = { color: "#918b84", side: THREE.DoubleSide, specular: "#918b84", shininess: 12 }
+  let material = new THREE.MeshPhongMaterial(material_option)
+  return material
+}
+
+// 🟩材质3
+function make_material4() {
+  const material_option = { color: 0xff9c7c, specular: 0x494949, shininess: 200 }
   let material = new THREE.MeshPhongMaterial(material_option)
   return material
 }
