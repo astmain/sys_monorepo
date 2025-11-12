@@ -9,7 +9,7 @@ const virtual_field_extension = Prisma.defineExtension({
 })
 
 export const prisma_instance = new PrismaClient().$extends(virtual_field_extension)
-export const db2 = new PrismaClient().$extends(virtual_field_extension)
+export const db1 = new PrismaClient().$extends(virtual_field_extension)
 
 interface Opt {
   path: string

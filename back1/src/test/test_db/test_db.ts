@@ -10,21 +10,16 @@ import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, Min, ValidateNested } fr
 import { Type } from 'class-transformer'
 
 
+// db
+import { db1 as db } from '@src/v1/zoom_prisma/db_prisma_1'
 
-
-
-
-
-// http://127.0.0.1:3002/doc.html
-// http://127.0.0.1:3004/test/test_oss?name1=111
 @Api_group('test', '测试数据库')
 export class test_db {
     @Api_Get('用户')
     async user() {
 
-
-
-        return { code: 200, msg: '成功:用户', result: {} }
+        const user_list = await db.user.findMany()
+        return { code: 200, msg: '成功:用户', result: {user_list} }
     }
 }
 
