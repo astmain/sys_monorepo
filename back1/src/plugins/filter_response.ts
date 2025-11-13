@@ -52,7 +52,7 @@ export function format_object_dates(obj: any): any {
     const formatted_obj: any = {}
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
-        if (key === 'created_at' || key === 'updated_at') {
+        if (key === 'at_created' || key === 'at_updated') {
           formatted_obj[key] = format_date_time(obj[key])
         } else {
           formatted_obj[key] = format_object_dates(obj[key])
@@ -73,7 +73,7 @@ export class filter_response_func<T> implements NestInterceptor<T, Response<T>> 
         // 格式化响应数据中的时间字段
         const formatted_data = format_object_dates(data)
         // console.log(`formatted_data:`, formatted_data)
-        const res_response = { code: formatted_data?.code, msg: formatted_data?.msg, result: formatted_data?.result, timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss SSS') }
+        const res_response = { code: formatted_data?.code, msg: formatted_data?.msg, result: formatted_data?.result, timestamp: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS') }
         // console.log(`filter_response:`,  JSON.stringify(res_response,null,2))
         return res_response
       })

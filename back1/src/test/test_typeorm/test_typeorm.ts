@@ -26,16 +26,17 @@ export class test_typeorm {
 
   @Api_Get('更新')
   async update() {
+    // 更新的方式1
+    const user = await db_typeorm.findOne(tb_user, { where: { id: '379d8261-be02-4c98-a96e-3312bc41d517' } })
+    user.name = '测试名称2'+util_uuid9()
+    const one = await db_typeorm.save(user)
 
-    // const user = await db_typeorm.findOne(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
-    // user.name = '测试名称2'
-    // const one = await db_typeorm.save(user)
-
-    const one = await db_typeorm.update(tb_user,
-        { id: "563a91d6-0473-4bf0-8def-68622d58137c" },                     // WHERE 条件
-        { name: "新名字",password: "123456" } // SET 字段
-      )
-
+    // 更新的方式2
+    // const one = await db_typeorm.update(
+    //   tb_user,
+    //   { id: '379d8261-be02-4c98-a96e-3312bc41d517' }, // WHERE 条件
+    //   { name: '新名字', password: '123456' }, // SET 字段
+    // )
 
     //   为什么我更新了数据但是 updatedAt 没有变化？
     return { code: 200, msg: '成功:更新', result: { one: one } }
@@ -43,7 +44,7 @@ export class test_typeorm {
 
   @Api_Get('查询')
   async find() {
-    const user = await db_typeorm.find(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
+    const user = await db_typeorm.find(tb_user, { where: { id: '379d8261-be02-4c98-a96e-3312bc41d517' } })
     return { code: 200, msg: '成功:查询', result: { user } }
   }
 }
