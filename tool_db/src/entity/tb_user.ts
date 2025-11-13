@@ -1,19 +1,28 @@
 import { Entity, PrimaryGeneratedColumn, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeUpdate, AfterLoad } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 import { Exclude, Expose } from 'class-transformer'
-@Entity('tb_user') // 指定表名为 users，如果不传参数，默认使用类名转为小写（如 User → user）
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiProperty, PickType } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger'
+import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, Min, ValidateNested } from 'class-validator'
+@Entity('tb_user')
 export class tb_user {
   constructor(user_data?: Partial<tb_user>) {
     Object.assign(this, user_data)
   }
 
   @PrimaryColumn({ type: 'varchar', comment: '主键ID' })
+  @ApiProperty({ description: '主键ID', example: 'uuid' })
+  @IsString()
   id: string = uuidv4() // 默认生成
 
   @Column({ length: 50 })
+  @ApiProperty({ description: '名称', example: '名称' })
+  @IsString()
   name: string
 
   @Column()
+  @ApiProperty({ description: '密码', example: '123456' })
+  @IsString()
   password: string
 
   @CreateDateColumn() // 自动记录创建时间
@@ -28,7 +37,7 @@ export class tb_user {
   @AfterLoad()
   setDefaultValues() {
     // 从数据库加载后，确保 other_name 有默认值
-    this.other_name = this.name + '_' +this.at_updated.toLocaleString()
+    this.other_name = this.name + '_' + this.at_updated.toLocaleString()
     console.log('other_name', this.other_name)
   }
 }
