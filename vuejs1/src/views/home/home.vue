@@ -15,6 +15,12 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { ArcballControls } from "three/examples/jsm/Addons.js"
 import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js"
 import { colorHex } from "./colorHex"
+import { type tb_test2_infer } from "tool_orm_Drizzle1"
+
+const tb_test2: tb_test2_infer = {
+  id: "",
+  name: "test",
+}
 
 // 变量
 let ref_canvas = ref()
