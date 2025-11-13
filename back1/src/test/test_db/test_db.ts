@@ -41,7 +41,7 @@ export class test_db {
         //     7
         const name = '测试名称' + util_uuid9()
         console.log(`111---name:`, name)
-        const one = await orm.update(tb_account).set({ name }).where(eq(tb_account.id, 7)).returning()
+        const one = await orm.update(tb_account).set({ name }).where(eq(tb_account.id, "7")).returning()
 
 
         // "one": [

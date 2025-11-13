@@ -8,6 +8,13 @@
       "when": 1763006825323,
       "tag": "0000_gray_fenris",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1763022727414,
+      "tag": "0001_sticky_valkyrie",
+      "breakpoints": true
     }
   ]
 }
