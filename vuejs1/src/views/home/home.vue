@@ -20,7 +20,7 @@ import { type tb_test2_infer } from "tool_orm_Drizzle1"
 const tb_test2: tb_test2_infer = {
   id: "",
   name: "test",
-  phone: "1234567890",
+  phone: "15160315110",
   // age: 18,
 }
 

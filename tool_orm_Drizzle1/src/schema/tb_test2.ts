@@ -9,6 +9,10 @@ export const tb_test2 = pgTable("tb_test2", {
     phone: varchar("phone", { length: 255 }),
 }, (table) => [
     check(
+        "tb_test2_age_non_negative",
+        sql`${table.age} >= 0`
+    ),
+    check(
         "tb_test2_phone_format_check",
         sql`${table.phone} ~ '^1[3-9][0-9]{9}$'`
     ),
