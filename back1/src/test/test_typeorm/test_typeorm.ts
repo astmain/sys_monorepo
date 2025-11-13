@@ -26,11 +26,19 @@ export class test_typeorm {
 
   @Api_Get('更新')
   async update() {
-    // 使用typeorm更新数据
-    const user = await db_typeorm.findOne(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
-    user.name = '测试名称2'
-    const one = await db_typeorm.save(user)
-    return { code: 200, msg: '成功:更新', result: { one } }
+
+    // const user = await db_typeorm.findOne(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
+    // user.name = '测试名称2'
+    // const one = await db_typeorm.save(user)
+
+    const one = await db_typeorm.update(tb_user,
+        { id: "563a91d6-0473-4bf0-8def-68622d58137c" },                     // WHERE 条件
+        { name: "新名字",password: "123456" } // SET 字段
+      )
+
+
+    //   为什么我更新了数据但是 updatedAt 没有变化？
+    return { code: 200, msg: '成功:更新', result: { one: one } }
   }
 
   @Api_Get('查询')
