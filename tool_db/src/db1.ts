@@ -1,10 +1,11 @@
 import { DataSource } from "typeorm";
 import { tb_test1 } from "./entity/tb_test1";
+import { tb_user } from "./entity/tb_user";
 
 export const db1_connect = new DataSource({
   type: "postgres",
   url: "postgresql://root:123456@103.119.2.223:2006/back?schema=public",
-  entities: [tb_test1],
+  entities: [tb_test1, tb_user],
   synchronize: true,
   logging: false,
 });
