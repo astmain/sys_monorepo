@@ -1,4 +1,4 @@
-import { db, db_client } from "./db_drizzle"
+import { db, db_client } from "./db"
 import { tb_test1 } from "./schema/tb_test1"
 import { eq } from "drizzle-orm"
 

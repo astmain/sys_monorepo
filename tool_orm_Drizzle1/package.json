@@ -12,13 +12,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "generate": " drizzle-kit generate         --config=./src/config.ts",
+    "push": "     drizzle-kit push             --config=./src/config.ts",
+    "studio": "   drizzle-kit studio           --config=./src/config.ts"
   },
   "dependencies": {
     "@anatine/zod-nestjs": "^2.0.12",

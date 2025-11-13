@@ -1,4 +1,4 @@
-import { db, db_client } from "./db_drizzle"
+import { db, db_client } from "./db"
 import * as schema from "./schema/index"
 
 async function migrate() {
