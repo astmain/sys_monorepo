@@ -11,6 +11,7 @@ export { eq } from "drizzle-orm"
 
 // 数据库表
 export * from "./schema/index"
+export { tb_test2_infer } from "./schema/tb_test2"
 
 
 

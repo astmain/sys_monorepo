@@ -44,6 +44,7 @@
     "vue-draggable-plus": "^0.6.0",
     "vue-router": "^4.5.1",
     "mqtt": "^5.14.1",
+    "tool_orm_Drizzle1": "workspace:*",
     "zod": "^4.1.12"
   },
   "devDependencies": {
