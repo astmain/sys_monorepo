@@ -1,5 +1,5 @@
-import { pgTable, serial, varchar, integer, check } from "drizzle-orm/pg-core"
-import { id_str, at_created, at_updated } from "../common"
+import { pgTable, varchar, integer, check } from "drizzle-orm/pg-core"
+import { id_str } from "../common"
 import { sql } from "drizzle-orm"
 
 export const tb_test2 = pgTable("tb_test2", {
@@ -7,12 +7,12 @@ export const tb_test2 = pgTable("tb_test2", {
     name: varchar("name", { length: 255 }),
     age: integer("age"),
     phone: varchar("phone", { length: 255 }),
-}, (table) => ({
-    phone_format_check: check(
+}, (table) => [
+    check(
         "tb_test2_phone_format_check",
         sql`${table.phone} ~ '^1[3-9][0-9]{9}$'`
     ),
-}))
+])
 
 import type { z } from 'zod'
 import { createSelectSchema, createUpdateSchema, createInsertSchema } from 'drizzle-zod'
