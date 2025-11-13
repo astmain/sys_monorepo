@@ -10,7 +10,8 @@ export const tb_test2 = pgTable("tb_test2", {
 
 
 import type { z } from 'zod'
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod'
+import { createSelectSchema, createUpdateSchema, createInsertSchema } from 'drizzle-zod'
 
-export const tb_test2_schema = createSelectSchema(tb_test2)
+export const tb_test2_schema = createInsertSchema(tb_test2).omit({ age: true, })
+// export const tb_test2_schema = createSelectSchema(tb_test2 )
 export type tb_test2_infer = z.infer<typeof tb_test2_schema>
