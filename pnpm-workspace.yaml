@@ -1,36 +1,35 @@
 packages:
   # 后端=====================================================
-  - "back0"
-  - "back1"
-  - "back2"
-  - "back3"
-  - "back4"
-  - "back5"
-  - "back6"
-  - "back7"
-  - "back8"
-  - "back9"
+  - 'back0'
+  - 'back1'
+  - 'back2'
+  - 'back3'
+  - 'back4'
+  - 'back5'
+  - 'back6'
+  - 'back7'
+  - 'back8'
+  - 'back9'
   # 前端=====================================================
-  - "vuejs0"
-  - "vuejs1"
-  - "vuejs2"
-  - "vuejs3"
-  - "vuejs4"
-  - "vuejs5"
-  - "vuejs6"
-  - "vuejs7"
-  - "vuejs8"
-  - "vuejs9"
+  - 'vuejs0'
+  - 'vuejs1'
+  - 'vuejs2'
+  - 'vuejs3'
+  - 'vuejs4'
+  - 'vuejs5'
+  - 'vuejs6'
+  - 'vuejs7'
+  - 'vuejs8'
+  - 'vuejs9'
   # 服务server_oss
-  - "server_oss"
-  - "server_mqtt"
-
+  - 'server_oss'
+  - 'server_mqtt'
 
   # 工具 =====================================================
-  - "tools_dict"
-  - "tool_my"
-  - "tool_db"
-  - "tool_orm_Drizzle"
+  - 'tools_dict'
+  - 'tool_my'
+  - 'tool_db'
+  - 'tool_orm_Drizzle1'
 #首次gitbash设置邮箱和用户名0
 #git config --global user.email "1311192345@qq.com"
 #git config --global user.name "astmain"

@@ -22,7 +22,7 @@ export function format_date_time(date: Date | string): string {
     return date.toString() // 如果日期无效，返回原字符串
   }
 
-  return dayjs_obj.format('YYYY-MM-DD HH:mm:ss SSS')
+  return dayjs_obj.format('YYYY-MM-DD HH:mm:ss.SSS')
 }
 
 /**

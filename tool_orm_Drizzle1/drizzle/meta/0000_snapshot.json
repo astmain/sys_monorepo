@@ -1,5 +1,5 @@
 {
-  "id": "fe42e1d4-3114-49a6-ae15-a46c6e5895c5",
+  "id": "f4435fb0-f103-4662-bacb-2c0782f2f158",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -19,6 +19,46 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tb_account": {
+      "name": "tb_account",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'小许'"
+        },
+        "at_created": {
+          "name": "at_created",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "at_updated": {
+          "name": "at_updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},

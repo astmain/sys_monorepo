@@ -8,6 +8,10 @@
   "scripts": {
     "开发": "==================== 开发 ====================",
     "make": "     pnpm i  &&  pnpm v1:generate  &&  pnpm v1:push   ",
+    "make2": "     pnpm i  &&   pnpm --filter  tool_orm_Drizzle1   make",
+
+
+
     "dev": "          dotenv -e .env.dev --        nest start --watch",
     "v1": "==================== v1 ============================================================",
     "v1:generate": "   dotenv -e .env.dev --        prisma generate     --schema=src/v1/zoom_prisma",
@@ -43,6 +47,7 @@
     "swagger-ui-express": "^5.0.0",
     "tool_db": "workspace:*",
     "tool_my": "workspace:*",
+    "tool_orm_Drizzle1": "workspace:*",
     "zod": "^4.1.11"
   },
   "devDependencies": {
