@@ -19,7 +19,7 @@ export class test_db {
     async user() {
 
         const user_list = await db.user.findMany()
-        return { code: 200, msg: '成功:用户', result: {user_list} }
+        return { code: 200, msg: '成功:用户', result: { user_list } }
     }
 }
 
