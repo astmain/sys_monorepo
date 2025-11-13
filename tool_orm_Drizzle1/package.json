@@ -15,9 +15,7 @@
     "build": "    tsc                                                  ",
     "generate": " drizzle-kit generate         --config=./src/config.ts",
     "push": "     drizzle-kit push             --config=./src/config.ts",
-    "studio": "   drizzle-kit studio           --config=./src/config.ts",
-    "migrate": "  ts-node src/run_migration.ts",
-    "gen-triggers": " ts-node src/generate_triggers.ts"
+    "studio": "   drizzle-kit studio           --config=./src/config.ts"
   },
   "dependencies": {
     "@anatine/zod-nestjs": "^2.0.12",
