@@ -20,6 +20,7 @@ export async function tool_db_init_entity() {
   try {
     if (!db1_connect.isInitialized) {
       await db1_connect.initialize()
+      await db1_connect.query("SET TIME ZONE 'Asia/Shanghai'")
       console.log('数据库连接成功')
     }
     // await db1_connect.synchronize()

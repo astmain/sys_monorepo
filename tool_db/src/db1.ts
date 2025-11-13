@@ -6,6 +6,7 @@ export const db1_connect = new DataSource({
   type: "postgres",
   url: "postgresql://root:123456@103.119.2.223:2006/back?schema=public",
   entities: [tb_test1, tb_user],
+  extra: { timezone: 'Asia/Shanghai' },
   synchronize: true,
   logging: false,
 });

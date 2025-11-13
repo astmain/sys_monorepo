@@ -21,22 +21,22 @@ export class test_typeorm {
     // const one = await db_typeorm.save(new tb_user({ name: '测试名称', password: '123456' }))
     const user = new tb_user({ name: '测试名称', password: '123456' })
     const one = await db_typeorm.save(user)
-    return { code: 200, msg: '成功:测试2_新增', result: { one } }
+    return { code: 200, msg: '成功:新增', result: { one } }
   }
 
   @Api_Get('更新')
   async update() {
     // 使用typeorm更新数据
-    const user = await db_typeorm.findOne(tb_user, { where: { id: 'fd3a81a4-15dd-4ecc-b26e-8e9b8265ec3d' } })
+    const user = await db_typeorm.findOne(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
     user.name = '测试名称2'
-    await db_typeorm.save(user)
-    return { code: 200, msg: '成功:测试2_更新', result: {} }
+    const one = await db_typeorm.save(user)
+    return { code: 200, msg: '成功:更新', result: { one } }
   }
 
   @Api_Get('查询')
   async find() {
-    const user = await db_typeorm.find(tb_user, { where: { id: 'fd3a81a4-15dd-4ecc-b26e-8e9b8265ec3d' } })
-    return { code: 200, msg: '成功:测试2_更新', result: {} }
+    const user = await db_typeorm.find(tb_user, { where: { id: '563a91d6-0473-4bf0-8def-68622d58137c' } })
+    return { code: 200, msg: '成功:查询', result: { user } }
   }
 }
 
