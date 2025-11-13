@@ -1,8 +1,7 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, BeforeInsert } from 'typeorm'
 import { tb_test1_zod_i } from '../tb_type/tb_test1_zod'
 
-// 定义构造函数参数类型，只允许 name 和 id 字段
-type TbTest1ConstructorData = {
+type tb_test1_constructor_data = {
   id?: string
   name?: string
 }
@@ -15,21 +14,16 @@ export class tb_test1 implements tb_test1_zod_i {
   @Column({ comment: '名称' })
   name: string
 
-  constructor(data?: TbTest1ConstructorData) {
-    if (data) {
-      // 只赋值实体中存在的字段
-      if ('id' in data && data.id !== undefined) {
-        this.id = data.id
-      } else {
-        // 如果没有提供 ID，自动生成一个字符串 ID
-        this.id = Date.now().toString() + '_' + Math.random().toString(36).substring(2, 11)
-      }
-      if ('name' in data && data.name !== undefined) {
-        this.name = data.name
-      }
-    } else {
-      // 如果没有传入任何数据，也生成一个默认 ID
-      this.id = Date.now().toString() + '_' + Math.random().toString(36).substring(2, 11)
-    }
+  constructor(data?: tb_test1_constructor_data) {
+    Object.assign(this, data)
+  }
+
+  @BeforeInsert()
+  private set_default_id(): void {
+    this.id ??= tb_test1.create_id()
+  }
+
+  private static create_id(): string {
+    return `${Date.now()}_${Math.random().toString(36).slice(2, 11)}`
   }
 }
