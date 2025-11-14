@@ -38,18 +38,18 @@ export class sys_user extends at_timestamp {
   @Column()
   @ApiProperty({ description: '姓名', example: '姓名' })
   @IsString()
-  name: string
+  name: string = ""
 
   @Column()
   @ApiProperty({ description: '头像', example: "https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png" })
   @IsString()
-  avatar: string
+  avatar: string = "https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png"
 
 
   @Column()
   @ApiProperty({ description: '备注', example: "" })
   @IsString()
-  remark: string
+  remark: string = ""
 
   @Column()
   @ApiProperty({ description: '状态', example: "1" })
@@ -61,5 +61,5 @@ export class sys_user extends at_timestamp {
   @IsString()
   @IsNotEmpty()
   @IsIn(['男', '女', '未知'], { message: '性别格式不正确' })
-  gender: '男' | '女' | '未知'
+  gender: '男' | '女' | '未知' = '未知'
 }

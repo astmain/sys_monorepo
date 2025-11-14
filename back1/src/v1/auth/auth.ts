@@ -38,8 +38,9 @@ export class auth {
         try {
             await db_typeorm.save(new sys_user({ user_id: "1", name: '许鹏', phone: '15160315110', password: '123456' }))
             await db_typeorm.save(new sys_user({ user_id: "2", name: '二狗', phone: '15160315112', password: '123456' }))
+            return { code: 200, msg: '成功:初始化数据', result: {} }
         } catch (error) {
-
+            return { code: 400, msg: '失败:初始化数据', result: { error } }
         }
 
         return { code: 200, msg: '成功', result: {} }
