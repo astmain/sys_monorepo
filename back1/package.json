@@ -10,9 +10,6 @@
     "make": "     pnpm i  &&  pnpm v1:generate  &&  pnpm v1:push   ",
     "make1": "     pnpm i  &&   pnpm --filter  tool_db             make     &&   pnpm --filter  tool_orm_Drizzle1   make",
     "make2": "     pnpm i  &&   pnpm --filter  tool_orm_Drizzle1   make",
-
-
-
     "dev": "          dotenv -e .env.dev --        nest start --watch",
     "v1": "==================== v1 ============================================================",
     "v1:generate": "   dotenv -e .env.dev --        prisma generate     --schema=src/v1/zoom_prisma",
