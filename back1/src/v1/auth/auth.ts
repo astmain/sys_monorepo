@@ -11,11 +11,12 @@ import { db_typeorm } from 'tool_db'
 import { sys_user } from 'tool_db'
 // ================================== dto ==================================
 import { login } from './dto/login'
+import { Api_public } from '@src/App_Auth'
 
 
 
 
-
+@Api_public()
 @Api_group('v1', '认证')
 export class auth {
     @Api_Post('登陆')

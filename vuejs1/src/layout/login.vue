@@ -53,25 +53,25 @@ async function handle_login_api() {
   if (!login_form_ref.value) return
   const valid = await login_form_ref.value.validate()
   if (valid) {
-    // const res: any = await api_v1.auth.login(login_form)
-    // console.log("api_v1.auth.login---res", res)
-    // if (res.code === 200) {
-    //   // localStorage.setItem("token", res.result.token)
-    //   // console.log("localStorage.setItem(token, res.result.token)", localStorage.getItem("token"))
-    //   BUS.token = res.result.token
-    //   const res2: any = await api_v1.user.find_one_user({ id: res.result.id })
-    //   console.log("api_v1.user.find_one_user---res2", res2)
-    //   BUS.role_menu_tree = res2.result.role_menu_tree
-    //   BUS.user = res2.result.user
-    //   // 跳转到首页
-    //   router.push("/home")
-    //   console.log("router.push(/home)")
-    // } else {
-    //   ElMessage.error(res.msg)
-    // }
-    BUS.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJ1c2VyX2lkIjoxLCJyb2xlSWRzIjpbXSwiZGVwYXJ0bWVudCI6W3siaWQiOjJ9XSwiaWF0IjoxNzU3NDMyNDgxLCJleHAiOjI2MjEzNDYwODEsInJvbGVzIjpbXSwiZXh0cmEiOnsiY2hlY2tlZCI6dHJ1ZX19.dHfLiPbWiLKdu5NYvNPcXTnVWvaSq3XQsIzyj-v6bJ0"
-    router.push("/home")
-    console.log("router.push(/home)")
+    const res: any = await api_v1.auth.login(login_form)
+    console.log("api_v1.auth.login---res", res)
+    if (res.code === 200) {
+      // localStorage.setItem("token", res.result.token)
+      // console.log("localStorage.setItem(token, res.result.token)", localStorage.getItem("token"))
+      BUS.token = res.result.token
+      // const res2: any = await api_v1.user.find_one_user({ id: res.result.id })
+      // console.log("api_v1.user.find_one_user---res2", res2)
+      // BUS.role_menu_tree = res2.result.role_menu_tree
+      // BUS.user = res2.result.user
+      // 跳转到首页
+      router.push("/home")
+      console.log("router.push(/home)")
+    } else {
+      ElMessage.error(res.msg)
+    }
+    // BUS.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1MTYwMzE1MTEwIiwicGhvbmUiOiIxNTE2MDMxNTExMCIsImlkIjoxLCJ1c2VyX2lkIjoxLCJyb2xlSWRzIjpbXSwiZGVwYXJ0bWVudCI6W3siaWQiOjJ9XSwiaWF0IjoxNzU3NDMyNDgxLCJleHAiOjI2MjEzNDYwODEsInJvbGVzIjpbXSwiZXh0cmEiOnsiY2hlY2tlZCI6dHJ1ZX19.dHfLiPbWiLKdu5NYvNPcXTnVWvaSq3XQsIzyj-v6bJ0"
+    // router.push("/home")
+    // console.log("router.push(/home)")
   }
 }
 </script>
