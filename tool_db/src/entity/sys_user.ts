@@ -3,41 +3,63 @@ import { v4 as uuidv4 } from 'uuid'
 import { Exclude, Expose } from 'class-transformer'
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiProperty, PickType } from '@nestjs/swagger'
 import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, Min, ValidateNested } from 'class-validator'
-@Entity('tb_user')
-export class tb_user {
-  constructor(user_data?: Partial<tb_user>) {
+import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, IsIn, IsBoolean, IsMobilePhone, Min, ValidateNested } from 'class-validator'
+
+import { at_timestamp } from './common'
+
+@Entity('sys_user')
+export class sys_user extends at_timestamp {
+  constructor(user_data?: Partial<sys_user>) {
+    super()
     Object.assign(this, user_data)
   }
 
   @PrimaryColumn({ type: 'varchar', comment: '主键ID' })
   @ApiProperty({ description: '主键ID', example: 'uuid' })
   @IsString()
-  id: string = uuidv4() // 默认生成
+  user_id: string = uuidv4()
 
-  @Column({ length: 50 })
-  @ApiProperty({ description: '名称', example: '名称' })
+
+  @Column()
+  @ApiProperty({ description: '手机号', example: '15160315110' })
   @IsString()
-  name: string
+  @IsNotEmpty()
+  @IsMobilePhone('zh-CN', {}, { message: '手机号格式不正确' })
+  phone: string
+
 
   @Column()
   @ApiProperty({ description: '密码', example: '123456' })
   @IsString()
+  @IsNotEmpty()
   password: string
 
-  @CreateDateColumn() // 自动记录创建时间
-  at_created: Date
 
-  @UpdateDateColumn() // 自动记录更新时间
-  at_updated: Date
+  @Column()
+  @ApiProperty({ description: '姓名', example: '姓名' })
+  @IsString()
+  name: string
 
-  @Exclude() // 不从 plain object 自动赋值
-  other_name: string = '123' // 默认值（对 new User() 有效）
+  @Column()
+  @ApiProperty({ description: '头像', example: "https://cdn.jsdelivr.net/gh/astmain/filestore@master/avatar_default.png" })
+  @IsString()
+  avatar: string
 
-  @AfterLoad()
-  setDefaultValues() {
-    // 从数据库加载后，确保 other_name 有默认值
-    this.other_name = this.name + '_' + this.at_updated.toLocaleString()
-    console.log('other_name', this.other_name)
-  }
+
+  @Column()
+  @ApiProperty({ description: '备注', example: "" })
+  @IsString()
+  remark: string
+
+  @Column()
+  @ApiProperty({ description: '状态', example: "1" })
+  @IsBoolean()
+  status: boolean = true
+
+  @Column()
+  @ApiProperty({ description: '性别', example: "男" })
+  @IsString()
+  @IsNotEmpty()
+  @IsIn(['男', '女', '未知'], { message: '性别格式不正确' })
+  gender: '男' | '女' | '未知'
 }
